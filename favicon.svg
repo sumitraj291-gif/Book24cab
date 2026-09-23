@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <linearGradient id="cabGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00E676"/>
+      <stop offset="100%" stop-color="#00C853"/>
+    </linearGradient>
+  </defs>
+  <!-- Background Squircle -->
+  <rect width="64" height="64" rx="16" fill="#0A0E17"/>
+  <!-- Subtle Border Glow -->
+  <rect x="1.5" y="1.5" width="61" height="61" rx="14.5" fill="none" stroke="#00C853" stroke-width="2" stroke-opacity="0.45"/>
+  <!-- Taxi Roof Beacon -->
+  <rect x="25" y="11" width="14" height="5" rx="2" fill="url(#cabGrad)"/>
+  <!-- Cab Body -->
+  <path d="M14 42 L18 25 C19 21 22 19 26 19 L38 19 C42 19 45 21 46 25 L50 42 C51 45 49 48 46 48 L18 48 C15 48 13 45 14 42 Z" fill="url(#cabGrad)"/>
+  <!-- Windshield -->
+  <path d="M21 27 L23 22 C24 21 25.5 21 27 21 L37 21 C38.5 21 40 21 41 22 L43 27 Z" fill="#0A0E17"/>
+  <!-- Headlights -->
+  <circle cx="21" cy="38" r="3.5" fill="#FFFFFF"/>
+  <circle cx="43" cy="38" r="3.5" fill="#FFFFFF"/>
+  <!-- Radiator Grille -->
+  <rect x="27" y="36" width="10" height="4" rx="2" fill="#0A0E17"/>
+  <!-- Lower Bumper / Wheels -->
+  <rect x="16" y="47" width="8" height="5" rx="2.5" fill="#0A0E17" stroke="#00C853" stroke-width="1.5"/>
+  <rect x="40" y="47" width="8" height="5" rx="2.5" fill="#0A0E17" stroke="#00C853" stroke-width="1.5"/>
+</svg>

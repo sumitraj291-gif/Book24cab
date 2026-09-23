@@ -1,0 +1,21 @@
+{
+  "name": "book24cab",
+  "version": "1.0.0",
+  "description": "Book24Cab - Outstation & Intercity Cab Booking Portal",
+  "main": "index.html",
+  "scripts": {
+    "dev": "http-server . -p 8080 -c-1",
+    "start": "http-server . -p 8080 -c-1",
+    "serve": "http-server . -p 8080 -c-1"
+  },
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  },
+  "keywords": [
+    "cab-booking",
+    "outstation-taxi",
+    "taxi-service"
+  ],
+  "author": "Book24Cab",
+  "license": "ISC"
+}
