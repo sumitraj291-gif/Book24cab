@@ -1585,39 +1585,85 @@ h1, h2, h3, h4, h5, h6 {
   white-space: nowrap;
 }
 
-/* Route Visual Strip */
+/* Route Visual Strip - Perfectly Aligned 2-Row Flow */
 .route-visual-strip {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
   background: linear-gradient(180deg, #F8FAFC 0%, #FFFFFF 100%);
   border: 1.5px solid var(--slate-200);
   border-radius: 14px;
-  padding: 14px 16px;
+  padding: 11px 14px 13px;
   margin-bottom: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
   position: relative;
 }
 
-.route-node {
+.route-strip-labels {
   display: flex;
   align-items: center;
-  gap: 8px;
-  min-width: 0;
+  justify-content: space-between;
 }
 
-.route-node .node-text {
-  display: flex;
-  flex-direction: column;
-}
-
-.route-node .node-label {
-  font-size: 9.5px;
+.strip-label-origin,
+.strip-label-dest {
+  font-size: 10px;
   font-weight: 800;
   letter-spacing: 0.06em;
   color: var(--slate-400);
+  text-transform: uppercase;
+  line-height: 1;
 }
 
-.route-node .node-city {
+.strip-label-origin {
+  padding-left: 20px; /* Aligns with city text past 12px ring */
+}
+
+.strip-label-dest {
+  padding-right: 22px; /* Aligns with city text before 14px pin */
+  text-align: right;
+}
+
+.highway-tag-pill {
+  font-size: 9.5px;
+  font-weight: 700;
+  color: var(--slate-600);
+  background: var(--white);
+  border: 1px solid var(--slate-200);
+  padding: 1.5px 8px;
+  border-radius: var(--radius-full);
+  white-space: nowrap;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.route-strip-cities {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.route-city-origin {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 0 1 auto;
+  min-width: 0;
+  max-width: 38%;
+}
+
+.route-city-dest {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  flex: 0 1 auto;
+  min-width: 0;
+  max-width: 38%;
+  text-align: right;
+}
+
+.route-city-origin .node-city,
+.route-city-dest .node-city {
   font-family: var(--font-head);
   font-size: 15.5px;
   font-weight: 800;
@@ -1625,24 +1671,16 @@ h1, h2, h3, h4, h5, h6 {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 95px;
-}
-
-.route-node.destination {
-  text-align: right;
-}
-
-.route-node.destination .node-text {
-  align-items: flex-end;
+  line-height: 1.2;
 }
 
 .node-ring {
   width: 12px;
   height: 12px;
   border-radius: 50%;
-  border: 3px solid var(--green);
+  border: 3px solid var(--good);
   background: var(--white);
-  box-shadow: 0 0 0 2px rgba(0, 200, 83, 0.25);
+  box-shadow: 0 0 0 2px rgba(30, 158, 107, 0.25);
   flex-shrink: 0;
 }
 
@@ -1654,29 +1692,16 @@ h1, h2, h3, h4, h5, h6 {
 
 .route-road-track {
   flex: 1;
-  margin: 0 10px;
+  min-width: 44px;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  position: relative;
-}
-
-.highway-tag-pill {
-  font-size: 10px;
-  font-weight: 700;
-  color: var(--slate-600);
-  background: var(--white);
-  border: 1px solid var(--slate-200);
-  padding: 1px 7px;
-  border-radius: var(--radius-full);
-  margin-bottom: 4px;
-  white-space: nowrap;
+  margin: 0 4px;
 }
 
 .track-dashed-line {
   width: 100%;
   height: 2px;
-  background: repeating-linear-gradient(90deg, #CBD5E1 0, #CBD5E1 6px, transparent 6px, transparent 10px);
+  background: repeating-linear-gradient(90deg, #CBD5E1 0, #CBD5E1 5px, transparent 5px, transparent 9px);
   position: relative;
   display: flex;
   align-items: center;
@@ -3001,14 +3026,26 @@ footer {
     display: none; /* Hide hover tooltips on mobile screens */
   }
 
-  /* Prevent iOS Safari auto-zoom on form focus */
+  /* Crisp, proportional mobile form inputs */
   .input-with-icon input,
   .input-with-icon select,
   input[type="text"],
   input[type="tel"],
   input[type="date"],
   select {
-    font-size: 16px;
+    font-size: 13.5px !important;
+    padding: 10px 12px 10px 38px !important;
+    height: 42px !important;
+  }
+
+  .form-group label {
+    font-size: 12px;
+    margin-bottom: 4px;
+  }
+
+  .trip-tab-btn {
+    font-size: 12px;
+    padding: 7px 6px;
   }
 
   .booking-action-dual {

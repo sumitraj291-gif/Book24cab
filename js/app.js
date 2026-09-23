@@ -635,24 +635,24 @@ function renderRoutes() {
         </div>
 
         <div class="route-visual-strip">
-          <div class="route-node origin">
-            <span class="node-ring"></span>
-            <div class="node-text">
-              <span class="node-label">PICKUP</span>
-              <span class="node-city">${r.from}</span>
-            </div>
-          </div>
-          <div class="route-road-track">
+          <div class="route-strip-labels">
+            <span class="strip-label-origin">PICKUP</span>
             <span class="highway-tag-pill">${highwayTag}</span>
-            <div class="track-dashed-line">
-              <span class="car-tracker-icon">🚗</span>
-            </div>
+            <span class="strip-label-dest">DROP</span>
           </div>
-          <div class="route-node destination">
-            <span class="node-pin">📍</span>
-            <div class="node-text">
-              <span class="node-label">DROP</span>
-              <span class="node-city">${r.to}</span>
+          <div class="route-strip-cities">
+            <div class="route-city-origin">
+              <span class="node-ring"></span>
+              <span class="node-city" title="${r.from}">${r.from}</span>
+            </div>
+            <div class="route-road-track">
+              <div class="track-dashed-line">
+                <span class="car-tracker-icon">🚗</span>
+              </div>
+            </div>
+            <div class="route-city-dest">
+              <span class="node-city" title="${r.to}">${r.to}</span>
+              <span class="node-pin">📍</span>
             </div>
           </div>
         </div>
