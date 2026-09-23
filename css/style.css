@@ -2518,7 +2518,7 @@ footer {
    ========================================================================== */
 .floating-actions {
   position: fixed;
-  bottom: 28px;
+  bottom: 36px;
   right: 24px;
   z-index: 870;
   display: flex;
@@ -2984,9 +2984,9 @@ footer {
 
   /* Floating Action Buttons - Lifted cleanly ABOVE the bottom sticky bar */
   .floating-actions {
-    bottom: calc(78px + env(safe-area-inset-bottom, 0px));
+    bottom: calc(96px + env(safe-area-inset-bottom, 0px));
     right: 16px;
-    gap: 10px;
+    gap: 12px;
     z-index: 860;
   }
   .fab {
@@ -2999,6 +2999,21 @@ footer {
   }
   .fab-tooltip {
     display: none; /* Hide hover tooltips on mobile screens */
+  }
+
+  /* Prevent iOS Safari auto-zoom on form focus */
+  .input-with-icon input,
+  .input-with-icon select,
+  input[type="text"],
+  input[type="tel"],
+  input[type="date"],
+  select {
+    font-size: 16px;
+  }
+
+  .booking-action-dual {
+    grid-template-columns: 1fr;
+    gap: 10px;
   }
 
   /* Bottom Sticky Bar */
@@ -3162,12 +3177,33 @@ footer {
     gap: 6px;
   }
 
+  .hero-badge-strip {
+    font-size: 11.5px;
+    padding: 5px 11px;
+    margin-bottom: 14px;
+  }
+  .hero-photo-tag {
+    font-size: 10.5px;
+    padding: 5px 8px;
+    gap: 6px;
+  }
+
   .floating-actions {
-    right: 12px;
-    bottom: calc(76px + env(safe-area-inset-bottom, 0px));
+    right: 14px;
+    bottom: calc(94px + env(safe-area-inset-bottom, 0px));
+    gap: 10px;
   }
   .fab {
     width: 46px;
     height: 46px;
+  }
+  .fab svg {
+    width: 21px;
+    height: 21px;
+  }
+
+  .modal-box {
+    padding: 28px 18px;
+    margin: 12px;
   }
 }
