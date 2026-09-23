@@ -40,7 +40,7 @@ const DEFAULT_ROUTES = [
   { id: 27, from: "Delhi",    to: "Gwalior",       category: "Uttar Pradesh", distance: 330, fare: 4399, desc: "Historic fort city ride with seasoned drivers.", active: true, bidirectional: true },
   { id: 28, from: "Delhi",    to: "Jaipur",        category: "Rajasthan",     distance: 280, fare: 3299, desc: "Delhi-Mumbai Expressway ride to Pink City.", active: true, bidirectional: true },
   { id: 29, from: "Bareilly", to: "Khatu Shyam Ji",category: "Rajasthan",    distance: 430, fare: 5499, desc: "Comfortable pilgrimage cab with flexible temple scheduling.", active: true, bidirectional: true },
-  { id: 30, from: "Delhi",    to: "Khatoo Shyam Ji",category: "Rajasthan",   distance: 300, fare: 3899, desc: "Direct darshan cab with doorstep pickup.", active: true, bidirectional: true },
+  { id: 30, from: "Delhi",    to: "Khatu Shyam Ji", category: "Rajasthan",   distance: 300, fare: 3899, desc: "Direct darshan cab with doorstep pickup.", active: true, bidirectional: true },
   { id: 31, from: "Delhi",    to: "Ranchi",        category: "Other",         distance: 1200,fare: 15999,desc: "Long-haul interstate cab, clean sanitized vehicle.", active: true, bidirectional: false },
   { id: 32, from: "Delhi",    to: "Kolkata",       category: "Other",         distance: 1500,fare: 19999,desc: "Multi-day outstation tour with 2 seasoned drivers.", active: true, bidirectional: false },
   { id: 33, from: "Bareilly", to: "Mumbai",        category: "Other",         distance: 1400,fare: 18499,desc: "Long-haul outstation travel with rest halts.", active: true, bidirectional: false },
@@ -570,18 +570,36 @@ function getHighwayTag(from, to) {
 
 function getCityImage(cityName) {
   const c = cityName.toLowerCase();
-  if (c.includes("bareilly")) return "images/dest-bareilly.jpg";
-  if (c.includes("delhi") || c.includes("noida") || c.includes("gurgaon")) return "images/dest-delhi.jpg";
+  // Hill Stations & Mountain Escapes (Each has its distinct landmark)
+  if (c.includes("dehradun")) return "images/dest-dehradun.jpg";
+  if (c.includes("bhimtal")) return "images/dest-bhimtal.jpg";
+  if (c.includes("kainchi")) return "images/dest-kainchidham.jpg";
+  if (c.includes("nainital")) return "images/dest-nainital.jpg";
+  if (c.includes("mussoorie")) return "images/dest-mussoorie.jpg";
+  if (c.includes("shimla")) return "images/dest-shimla.jpg";
+  if (c.includes("manali")) return "images/dest-manali.jpg";
+
+  // Sacred Pilgrimages & Spiritual Towns
   if (c.includes("haridwar")) return "images/dest-haridwar.jpg";
-  if (c.includes("rishikesh") || c.includes("dehradun")) return "images/dest-rishikesh.jpg";
-  if (c.includes("nainital") || c.includes("bhimtal") || c.includes("kainchi")) return "images/dest-nainital.jpg";
+  if (c.includes("rishikesh")) return "images/dest-rishikesh.jpg";
   if (c.includes("ayodhya")) return "images/dest-ayodhya.jpg";
-  if (c.includes("agra")) return "images/dest-agra.jpg";
   if (c.includes("mathura") || c.includes("vrindavan")) return "images/dest-mathura.jpg";
-  if (c.includes("jaipur") || c.includes("khatu")) return "images/dest-jaipur.jpg";
-  if (c.includes("manali") || c.includes("shimla")) return "images/dest-manali.jpg";
-  if (c.includes("amritsar") || c.includes("jalandhar") || c.includes("ludhiana") || c.includes("chandigarh")) return "images/dest-amritsar.jpg";
-  if (c.includes("varanasi") || c.includes("prayagraj") || c.includes("lucknow") || c.includes("gwalior") || c.includes("patna")) return "images/dest-varanasi.jpg";
+  if (c.includes("varanasi")) return "images/dest-varanasi.jpg";
+  if (c.includes("prayagraj") || c.includes("allahabad")) return "images/dest-prayagraj.jpg";
+  if (c.includes("amritsar")) return "images/dest-amritsar.jpg";
+  if (c.includes("khatu") || c.includes("khatoo")) return "images/dest-khatushyam.jpg";
+
+  // Heritage & Intercity Corridors
+  if (c.includes("bareilly")) return "images/dest-bareilly.jpg";
+  if (c.includes("delhi") || c.includes("noida") || c.includes("gurgaon") || c.includes("ghaziabad")) return "images/dest-delhi.jpg";
+  if (c.includes("lucknow")) return "images/dest-lucknow.jpg";
+  if (c.includes("chandigarh")) return "images/dest-chandigarh.jpg";
+  if (c.includes("agra")) return "images/dest-agra.jpg";
+  if (c.includes("jaipur")) return "images/dest-jaipur.jpg";
+  if (c.includes("jalandhar") || c.includes("ludhiana")) return "images/dest-amritsar.jpg";
+  if (c.includes("gwalior")) return "images/dest-gwalior.jpg";
+  if (c.includes("patna")) return "images/dest-varanasi.jpg";
+
   return "images/hero-cab.jpg";
 }
 
