@@ -2518,37 +2518,49 @@ footer {
    ========================================================================== */
 .floating-actions {
   position: fixed;
-  bottom: 24px;
+  bottom: 28px;
   right: 24px;
-  z-index: 850;
+  z-index: 870;
   display: flex;
   flex-direction: column;
   gap: 12px;
+  align-items: center;
 }
 
 .fab {
-  width: 56px;
-  height: 56px;
+  width: 54px;
+  height: 54px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   color: var(--white);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 10px 24px rgba(14, 27, 46, 0.28);
   position: relative;
-  transition: transform 0.2s ease;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease;
+  border: 2px solid rgba(255, 255, 255, 0.3);
 }
 
 .fab:hover {
-  transform: scale(1.08);
+  transform: translateY(-3px) scale(1.06);
+  box-shadow: 0 14px 30px rgba(14, 27, 46, 0.36);
 }
 
 .fab.whatsapp {
   background: #25D366;
+  animation: pulseWa 3s infinite;
 }
 
 .fab.call {
-  background: var(--onyx);
+  background: var(--navy);
+  color: var(--gold);
+  border-color: rgba(245, 166, 35, 0.4);
+}
+
+@keyframes pulseWa {
+  0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.55), 0 8px 24px rgba(0,0,0,0.22); }
+  60% { box-shadow: 0 0 0 12px rgba(37, 211, 102, 0), 0 8px 24px rgba(0,0,0,0.22); }
+  100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0), 0 8px 24px rgba(0,0,0,0.22); }
 }
 
 .fab-tooltip {
@@ -2556,7 +2568,7 @@ footer {
   right: 68px;
   top: 50%;
   transform: translateY(-50%) translateX(6px);
-  background: var(--onyx);
+  background: var(--navy);
   color: var(--white);
   padding: 6px 12px;
   border-radius: var(--radius-sm);
@@ -2567,6 +2579,7 @@ footer {
   pointer-events: none;
   transition: all 0.2s ease;
   box-shadow: var(--shadow-md);
+  border: 1px solid rgba(255, 255, 255, 0.15);
 }
 
 .fab:hover .fab-tooltip {
@@ -2580,10 +2593,12 @@ footer {
   bottom: 0;
   left: 0;
   right: 0;
-  z-index: 840;
-  background: var(--white);
+  z-index: 850;
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   padding: 10px 16px calc(10px + env(safe-area-inset-bottom, 0px));
-  box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 -8px 24px rgba(14, 27, 46, 0.12);
   border-top: 1px solid var(--slate-200);
 }
 
@@ -2591,6 +2606,14 @@ footer {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 10px;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.mobile-sticky-bar .dual-bar .btn {
+  padding: 11px 16px;
+  font-size: 14.5px;
+  font-weight: 700;
 }
 
 /* ==========================================================================
@@ -2933,13 +2956,13 @@ footer {
 }
 
 /* ==========================================================================
-   Responsive Breakpoints
+   Comprehensive Mobile & Tablet Responsive Engine
    ========================================================================== */
 @media (max-width: 1024px) {
-  .hero-grid { grid-template-columns: 1fr; gap: 40px; }
+  .hero-grid { grid-template-columns: 1fr; gap: 36px; }
   .fleet-grid { grid-template-columns: repeat(2, 1fr); }
   .trust-bar-grid { grid-template-columns: repeat(2, 1fr); }
-  .why-grid { grid-template-columns: repeat(2, 1fr); }
+  .why-layout { grid-template-columns: 1fr; gap: 36px; }
   .process-grid { grid-template-columns: 1fr; }
   .reviews-grid { grid-template-columns: 1fr; }
   .form-wrapper { grid-template-columns: 1fr; }
@@ -2948,13 +2971,203 @@ footer {
 }
 
 @media (max-width: 768px) {
+  /* Navigation */
   .nav-links { display: none; }
-  .header-phone-btn span { display: none; }
+  .header-container { padding: 12px 16px; }
+  .header-actions .btn { display: none; } /* Hide Book Cab button in header on mobile to prevent clutter */
+  .header-phone-btn span { display: none; } /* Show compact phone icon on mobile header */
+  .header-phone-btn { padding: 8px 12px; }
   .hamburger { display: flex; }
-  .fleet-grid { grid-template-columns: 1fr; }
-  .form-inputs-grid { grid-template-columns: 1fr; }
-  .footer-grid { grid-template-columns: 1fr; }
-  .mobile-sticky-bar { display: block; }
-  body { padding-bottom: 70px; }
+
+  /* Body offset for mobile sticky bottom bar */
+  body { padding-bottom: calc(76px + env(safe-area-inset-bottom, 0px)); }
+
+  /* Floating Action Buttons - Lifted cleanly ABOVE the bottom sticky bar */
+  .floating-actions {
+    bottom: calc(78px + env(safe-area-inset-bottom, 0px));
+    right: 16px;
+    gap: 10px;
+    z-index: 860;
+  }
+  .fab {
+    width: 48px;
+    height: 48px;
+  }
+  .fab svg {
+    width: 22px;
+    height: 22px;
+  }
+  .fab-tooltip {
+    display: none; /* Hide hover tooltips on mobile screens */
+  }
+
+  /* Bottom Sticky Bar */
+  .mobile-sticky-bar {
+    display: block;
+  }
+
+  /* Section Spacing on Mobile */
+  .hero { padding: 32px 0 44px; }
+  .fleet-section,
+  .routes-section,
+  .rate-card-section,
+  .why-section,
+  .process-section,
+  .reviews-section,
+  .form-section,
+  .faq-section {
+    padding: 56px 0;
+  }
+  .section-head { margin-bottom: 32px; }
+  .section-head h2 { font-size: 26px; }
+  .section-head p { font-size: 14.5px; }
+
+  /* Hero adjustments */
+  .hero h1 { font-size: clamp(26px, 6.5vw, 34px); margin-bottom: 14px; }
+  .hero-subtitle { font-size: 14.5px; margin-bottom: 18px; }
+  .hero-feature-tags { gap: 8px; margin-bottom: 18px; }
+  .feature-tag { font-size: 12px; padding: 5px 11px; }
+  .hero-real-visual { margin-bottom: 20px; }
+  .hero-cab-img { height: 175px; }
+  .hero-photo-tag { font-size: 11.5px; padding: 6px 10px; }
+
+  .hero-stats-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    text-align: center;
+    padding-top: 18px;
+  }
+  .hero-stat-item .stat-num { font-size: 22px; }
+  .hero-stat-item .stat-lbl { font-size: 11px; }
+
+  /* Booking Widget */
+  .booking-widget-header { padding: 16px 18px; }
+  .booking-widget-header h3 { font-size: 18px; }
+  .trip-type-tabs { margin: 14px 16px 0; padding: 4px; }
+  .trip-tab-btn { padding: 8px 4px; font-size: 12px; }
+  .booking-widget-body { padding: 16px 16px 20px; }
+  .form-row-2 { grid-template-columns: 1fr; gap: 12px; }
+
+  /* Fleet Grid */
+  .fleet-grid { grid-template-columns: 1fr; max-width: 440px; margin: 0 auto; gap: 20px; }
+  .fleet-photo-box { height: 170px; }
+
+  /* Routes Explorer & Quick Chips */
+  .featured-routes-grid { grid-template-columns: 1fr; max-width: 440px; margin: 0 auto; }
+  .quick-filter-chips {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: 6px 4px 14px;
+    justify-content: flex-start;
+    scrollbar-width: none;
+    gap: 8px;
+  }
+  .quick-filter-chips::-webkit-scrollbar { display: none; }
+  .city-filter-chip { flex-shrink: 0; }
+  .routes-grid { grid-template-columns: 1fr; max-width: 440px; margin: 0 auto; gap: 18px; }
+  .route-search-bar input { padding: 13px 18px 13px 44px; font-size: 14px; }
+
+  /* Rate Card Table Horizontal Scroll */
+  .rate-card-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .rate-table { min-width: 540px; }
+  .rate-table th, .rate-table td { padding: 12px 14px; font-size: 13.5px; }
+  .rate-inclusions-strip {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    padding: 16px;
+  }
+
+  /* Why Us Showcase */
+  .why-layout { grid-template-columns: 1fr; gap: 24px; }
+  .why-image-main img { height: 210px; }
+  .why-image-secondary {
+    width: 150px;
+    height: 110px;
+    right: 8px;
+    bottom: -16px;
+    border-width: 3px;
+  }
+  .why-floating-badge {
+    left: 8px;
+    top: 10px;
+    font-size: 11.5px;
+    padding: 6px 12px;
+  }
+  .why-grid { grid-template-columns: 1fr; gap: 14px; }
+
+  /* Process / How It Works */
+  .process-grid { grid-template-columns: 1fr; gap: 18px; }
+  .process-step-card { padding: 24px 20px; }
+
+  /* Reviews */
+  .reviews-grid { grid-template-columns: 1fr; gap: 16px; }
+  .review-card { padding: 20px; }
+
+  /* Booking Inquiry Form */
+  .form-wrapper { grid-template-columns: 1fr; border-radius: 18px; }
+  .form-info-side { padding: 32px 20px; }
+  .form-info-side h3 { font-size: 24px; }
+  .form-inputs-side { padding: 28px 18px; }
+  .form-inputs-grid { grid-template-columns: 1fr; gap: 14px; }
+
+  /* CTA Banner */
+  .cta-banner h2 { font-size: 24px; }
+  .cta-buttons-row { flex-direction: column; width: 100%; gap: 10px; }
+  .cta-buttons-row .btn { width: 100%; }
+
+  /* Footer */
+  .footer-grid { grid-template-columns: 1fr; gap: 28px; }
+  .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+
+  /* Admin */
   .admin-metrics-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 480px) {
+  .container { padding: 0 14px; }
+  .header-container { padding: 10px 14px; }
+  .logo { font-size: 19px; gap: 9px; }
+  .logo-icon-wrap { width: 34px; height: 34px; }
+
+  .booking-widget-header h3 { font-size: 17px; }
+  .booking-action-dual { grid-template-columns: 1fr; gap: 10px; }
+  .cab-picker-row { gap: 5px; }
+  .cab-pill-opt { padding: 6px 3px; }
+  .cab-pill-opt .name { font-size: 11.5px; }
+  .cab-pill-opt .meta { font-size: 9.5px; }
+
+  .rate-inclusions-strip { grid-template-columns: 1fr; }
+
+  .route-path-diagram {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+    padding: 12px;
+  }
+  .route-connector-line {
+    margin: 4px 0;
+  }
+  .route-city-node:last-child {
+    text-align: left !important;
+  }
+  .dual-pricing-box {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+
+  .floating-actions {
+    right: 12px;
+    bottom: calc(76px + env(safe-area-inset-bottom, 0px));
+  }
+  .fab {
+    width: 46px;
+    height: 46px;
+  }
 }
