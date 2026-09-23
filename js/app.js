@@ -568,20 +568,20 @@ function getHighwayTag(from, to) {
   return "🛣️ Direct Highway";
 }
 
-function getRouteImage(from, to) {
-  const t = to.toLowerCase();
-  const f = from.toLowerCase();
-  if (t.includes("haridwar")) return "images/dest-haridwar.jpg";
-  if (t.includes("rishikesh") || t.includes("dehradun")) return "images/dest-rishikesh.jpg";
-  if (t.includes("nainital") || t.includes("bhimtal") || t.includes("kainchi")) return "images/dest-nainital.jpg";
-  if (t.includes("ayodhya")) return "images/dest-ayodhya.jpg";
-  if (t.includes("agra")) return "images/dest-agra.jpg";
-  if (t.includes("mathura") || t.includes("vrindavan")) return "images/dest-mathura.jpg";
-  if (t.includes("jaipur") || t.includes("khatu")) return "images/dest-jaipur.jpg";
-  if (t.includes("manali") || t.includes("shimla")) return "images/dest-manali.jpg";
-  if (t.includes("amritsar") || t.includes("jalandhar") || t.includes("ludhiana") || t.includes("chandigarh")) return "images/dest-amritsar.jpg";
-  if (t.includes("varanasi") || t.includes("prayagraj") || t.includes("lucknow") || t.includes("gwalior") || t.includes("patna")) return "images/dest-varanasi.jpg";
-  if (t.includes("delhi") || f.includes("delhi")) return "images/dest-delhi.jpg";
+function getCityImage(cityName) {
+  const c = cityName.toLowerCase();
+  if (c.includes("bareilly")) return "images/dest-bareilly.jpg";
+  if (c.includes("delhi") || c.includes("noida") || c.includes("gurgaon")) return "images/dest-delhi.jpg";
+  if (c.includes("haridwar")) return "images/dest-haridwar.jpg";
+  if (c.includes("rishikesh") || c.includes("dehradun")) return "images/dest-rishikesh.jpg";
+  if (c.includes("nainital") || c.includes("bhimtal") || c.includes("kainchi")) return "images/dest-nainital.jpg";
+  if (c.includes("ayodhya")) return "images/dest-ayodhya.jpg";
+  if (c.includes("agra")) return "images/dest-agra.jpg";
+  if (c.includes("mathura") || c.includes("vrindavan")) return "images/dest-mathura.jpg";
+  if (c.includes("jaipur") || c.includes("khatu")) return "images/dest-jaipur.jpg";
+  if (c.includes("manali") || c.includes("shimla")) return "images/dest-manali.jpg";
+  if (c.includes("amritsar") || c.includes("jalandhar") || c.includes("ludhiana") || c.includes("chandigarh")) return "images/dest-amritsar.jpg";
+  if (c.includes("varanasi") || c.includes("prayagraj") || c.includes("lucknow") || c.includes("gwalior") || c.includes("patna")) return "images/dest-varanasi.jpg";
   return "images/hero-cab.jpg";
 }
 
@@ -643,16 +643,29 @@ function renderRoutes() {
     const durationHrs = (r.distance / 52).toFixed(1);
     const suvFare = r.suvFare || Math.round(r.fare * 1.38 / 50) * 50;
     const highwayTag = getHighwayTag(r.from, r.to);
-    const routeImg = getRouteImage(r.from, r.to);
+    const originImg = getCityImage(r.from);
+    const destImg = getCityImage(r.to);
 
     card.innerHTML = `
       <div>
-        <div class="route-card-thumb">
-          <img src="${routeImg}" alt="${r.to}" loading="lazy">
-          <span class="route-thumb-dest-tag">
-            <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 21s-8-7.5-8-12a8 8 0 1 1 16 0c0 4.5-8 12-8 12z"/><circle cx="12" cy="9" r="3"/></svg>
-            ${r.to}
-          </span>
+        <div class="route-card-thumb dual-split-thumb">
+          <div class="split-side split-origin">
+            <img src="${originImg}" alt="${r.from}" loading="lazy">
+            <span class="split-city-pill origin-pill">
+              <span class="dot-indicator origin-dot"></span>
+              ${r.from}
+            </span>
+          </div>
+          <div class="split-divider-badge">
+            <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </div>
+          <div class="split-side split-dest">
+            <img src="${destImg}" alt="${r.to}" loading="lazy">
+            <span class="split-city-pill dest-pill">
+              <span class="dot-indicator dest-dot"></span>
+              ${r.to}
+            </span>
+          </div>
         </div>
 
         <div class="route-card-content">
