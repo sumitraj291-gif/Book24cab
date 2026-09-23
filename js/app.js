@@ -310,7 +310,8 @@ const FEATURED_CORRIDORS = [
     sedanFare: 2799,
     suvFare: 3899,
     trips: "1,940+ rides",
-    rating: "4.9"
+    rating: "4.9",
+    image: "images/dest-delhi.jpg"
   },
   {
     id: 8,
@@ -323,7 +324,8 @@ const FEATURED_CORRIDORS = [
     sedanFare: 2399,
     suvFare: 3499,
     trips: "1,580+ rides",
-    rating: "4.9"
+    rating: "4.9",
+    image: "images/dest-nainital.jpg"
   },
   {
     id: 24,
@@ -336,7 +338,8 @@ const FEATURED_CORRIDORS = [
     sedanFare: 4899,
     suvFare: 6799,
     trips: "1,120+ rides",
-    rating: "4.9"
+    rating: "4.9",
+    image: "images/dest-ayodhya.jpg"
   }
 ];
 
@@ -350,6 +353,11 @@ function renderFeaturedRoutes() {
     card.className = "featured-route-card";
     card.innerHTML = `
       <div>
+        <div class="featured-route-thumb">
+          <img src="${r.image}" alt="${r.to}" loading="lazy">
+          <span class="route-thumb-tag">${r.to}</span>
+        </div>
+
         <div class="featured-card-top">
           <span class="featured-tag">
             <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
