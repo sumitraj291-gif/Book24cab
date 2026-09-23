@@ -568,6 +568,23 @@ function getHighwayTag(from, to) {
   return "🛣️ Direct Highway";
 }
 
+function getRouteImage(from, to) {
+  const t = to.toLowerCase();
+  const f = from.toLowerCase();
+  if (t.includes("haridwar")) return "images/dest-haridwar.jpg";
+  if (t.includes("rishikesh") || t.includes("dehradun")) return "images/dest-rishikesh.jpg";
+  if (t.includes("nainital") || t.includes("bhimtal") || t.includes("kainchi")) return "images/dest-nainital.jpg";
+  if (t.includes("ayodhya")) return "images/dest-ayodhya.jpg";
+  if (t.includes("agra")) return "images/dest-agra.jpg";
+  if (t.includes("mathura") || t.includes("vrindavan")) return "images/dest-mathura.jpg";
+  if (t.includes("jaipur") || t.includes("khatu")) return "images/dest-jaipur.jpg";
+  if (t.includes("manali") || t.includes("shimla")) return "images/dest-manali.jpg";
+  if (t.includes("amritsar") || t.includes("jalandhar") || t.includes("ludhiana") || t.includes("chandigarh")) return "images/dest-amritsar.jpg";
+  if (t.includes("varanasi") || t.includes("prayagraj") || t.includes("lucknow") || t.includes("gwalior") || t.includes("patna")) return "images/dest-varanasi.jpg";
+  if (t.includes("delhi") || f.includes("delhi")) return "images/dest-delhi.jpg";
+  return "images/hero-cab.jpg";
+}
+
 function renderRoutes() {
   const grid = document.getElementById("routesGrid");
   const counterEl = document.getElementById("routeCounterBadge");
@@ -626,36 +643,46 @@ function renderRoutes() {
     const durationHrs = (r.distance / 52).toFixed(1);
     const suvFare = r.suvFare || Math.round(r.fare * 1.38 / 50) * 50;
     const highwayTag = getHighwayTag(r.from, r.to);
+    const routeImg = getRouteImage(r.from, r.to);
 
     card.innerHTML = `
       <div>
-        <div class="route-card-header">
-          <span class="route-theme-pill ${theme.badgeClass}">${theme.tag}</span>
-          <span class="route-duration-badge">⏱️ ~${durationHrs}h • ${r.distance}km</span>
+        <div class="route-card-thumb">
+          <img src="${routeImg}" alt="${r.to}" loading="lazy">
+          <span class="route-thumb-dest-tag">
+            <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 21s-8-7.5-8-12a8 8 0 1 1 16 0c0 4.5-8 12-8 12z"/><circle cx="12" cy="9" r="3"/></svg>
+            ${r.to}
+          </span>
         </div>
 
-        <div class="route-visual-strip">
-          <div class="route-strip-labels">
-            <span class="strip-label-origin">PICKUP</span>
-            <span class="highway-tag-pill">${highwayTag}</span>
-            <span class="strip-label-dest">DROP</span>
+        <div class="route-card-content">
+          <div class="route-card-header">
+            <span class="route-theme-pill ${theme.badgeClass}">${theme.tag}</span>
+            <span class="route-duration-badge">⏱️ ~${durationHrs}h • ${r.distance}km</span>
           </div>
-          <div class="route-strip-cities">
-            <div class="route-city-origin">
-              <span class="node-ring"></span>
-              <span class="node-city" title="${r.from}">${r.from}</span>
+
+          <div class="route-visual-strip">
+            <div class="route-strip-labels">
+              <span class="strip-label-origin">PICKUP</span>
+              <span class="highway-tag-pill">${highwayTag}</span>
+              <span class="strip-label-dest">DROP</span>
             </div>
-            <div class="route-road-track">
-              <div class="track-dashed-line">
-                <span class="car-tracker-icon">🚗</span>
+            <div class="route-strip-cities">
+              <div class="route-city-origin">
+                <span class="node-ring"></span>
+                <span class="node-city" title="${r.from}">${r.from}</span>
+              </div>
+              <div class="route-road-track">
+                <div class="track-dashed-line">
+                  <span class="car-tracker-icon">🚗</span>
+                </div>
+              </div>
+              <div class="route-city-dest">
+                <span class="node-city" title="${r.to}">${r.to}</span>
+                <span class="node-pin">📍</span>
               </div>
             </div>
-            <div class="route-city-dest">
-              <span class="node-city" title="${r.to}">${r.to}</span>
-              <span class="node-pin">📍</span>
-            </div>
           </div>
-        </div>
 
         <p class="route-desc">${r.desc || 'Clean AC outstation cab with verified highway chauffeur.'}</p>
 
@@ -683,6 +710,7 @@ function renderRoutes() {
           </button>
         </div>
       </div>
+    </div>
 
       <div class="route-card-actions">
         <button class="btn btn-primary btn-sm card-book-btn" data-from="${r.from}" data-to="${r.to}">
